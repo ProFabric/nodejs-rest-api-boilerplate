@@ -1,0 +1,11 @@
+{
+  "name": "nodejs-rest-api-boilerplate",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/ProFabric/nodejs-rest-api-boilerplate.git",
+  "author": "ProFabric <mmd-1903@hotmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
