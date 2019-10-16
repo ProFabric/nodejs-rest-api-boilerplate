@@ -7,7 +7,6 @@
   "license": "MIT",
   "scripts": {
     "start": "node_modules/.bin/nodemon .src/index.js",
-    "pretest": "node_modules/.bin/eslint --ignore-path .gitignore .",
     "lint": "node_modules/.bin/eslint 'src/**/*.js' --fix",
     "format": "node_modules/.bin/prettier-eslint 'src/**/*.{js,json}' --write"
   },
