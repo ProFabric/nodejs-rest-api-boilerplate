@@ -6,8 +6,21 @@
   "author": "ProFabric <mmd-1903@hotmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "node_modules/.bin/nodemon index.js",
-    "pretest": "node_modules/.bin/eslint --ignore-path .gitignore ."
+    "start": "node_modules/.bin/nodemon .src/index.js",
+    "lint": "node_modules/.bin/eslint 'src/**/*.js' --fix",
+    "format": "node_modules/.bin/prettier-eslint 'src/**/*.{js,json}' --write"
+  },
+  "lint-staged": {
+    "**/*.js": [
+      "node_modules/.bin/eslint --fix",
+      "node_modules/.bin/prettier-eslint --write",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "dependencies": {
     "express": "^4.17.1"
@@ -15,8 +28,14 @@
   "devDependencies": {
     "eslint": "^6.5.1",
     "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-config-prettier": "^6.4.0",
     "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-promise": "^4.2.1",
     "husky": "^3.0.9",
-    "nodemon": "^1.19.3"
+    "lint-staged": "^9.4.2",
+    "nodemon": "^1.19.3",
+    "prettier": "^1.18.2",
+    "prettier-eslint-cli": "^5.0.0"
   }
 }
