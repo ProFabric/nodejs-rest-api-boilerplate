@@ -1,8 +1,7 @@
 const router = require('express').Router();
+const userController = require('./../../controllers/user.controller');
 
-router.post('/signup', (req, res) => {
-  res.status(200).json('Signup');
-});
+router.post('/signup', userController.registerUser);
 
 router.post('/signin', (req, res) => {
   res.status(200).json('signin');

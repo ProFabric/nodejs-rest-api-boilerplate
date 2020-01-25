@@ -1,15 +1,15 @@
 const devConfig = {
-  MONGO_URL: 'mongodb://mongo/Visto',
+  MONGO_URL: 'mongodb://127.0.0.1/Aaas',
   JWT_SECRET: 'thisisAsecret'
 };
 
 const testConfig = {
-  MONGO_URL: 'mongodb://mongo/Visto',
+  MONGO_URL: 'mongodb://127.0.0.1/Aaas',
   JWT_SECRET: 'thisisAsecret'
 };
 
 const prodConfig = {
-  MONGO_URL: 'mongodb://mongo/Visto',
+  MONGO_URL: 'mongodb://127.0.0.1/Aaas',
   JWT_SECRET: 'thisisAsecret'
 };
 

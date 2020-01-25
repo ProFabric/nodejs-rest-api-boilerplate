@@ -18,6 +18,7 @@
     "prefer-arrow-callback": "error",
     "comma-dangle": ["error", "never"],
     "space-before-function-paren": ["error", "never"],
-    "strict": ["error", "global"]
+    "strict": ["error", "global"],
+    "arrow-parens": ["error", "as-needed"]
   }
 }

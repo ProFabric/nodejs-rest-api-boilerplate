@@ -38,7 +38,7 @@ const routes = require('./routes');
 app.use('/v1', routes);
 
 app.get('/', (req, res) => {
-  res.json({ status: true });
+  res.status(200).json({ message: 'App is running!' });
 });
 
 app.get('*', (req, res) => {
