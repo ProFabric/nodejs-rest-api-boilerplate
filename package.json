@@ -8,7 +8,7 @@
 	"scripts": {
 		"start": "node_modules/.bin/nodemon src/index.js",
 		"lint": "node_modules/.bin/eslint 'src/**/*.js' --fix",
-		"format": "node_modules/.bin/prettier-eslint 'src/**/*.{js,json}' --write"
+		"format": "node_modules/.bin/prettier-eslint $PWD/'src/**/*.{js,json}' --write"
 	},
 	"lint-staged": {
 		"**/*.js": [
