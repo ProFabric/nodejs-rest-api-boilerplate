@@ -1,14 +1,15 @@
-const express = require('express');
-const cors = require('cors');
-const bodyParser = require('body-parser');
-const morgan = require('morgan');
-const compression = require('compression');
-const helmet = require('helmet');
-const passport = require('passport');
-const constants = require('../config/constants');
+import express from 'express';
+import cors from 'cors';
+import bodyParser from 'body-parser';
+import morgan from 'morgan';
+import compression from 'compression';
+import helmet from 'helmet';
+import passport from 'passport';
+import dotenv from 'dotenv';
+import constants from '../config/constants';
+import {} from '../config/db';
 
-require('dotenv').config();
-require('./../config/db');
+dotenv.config();
 
 const app = express();
 const port = constants.PORT;

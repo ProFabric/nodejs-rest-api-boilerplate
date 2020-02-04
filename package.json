@@ -6,7 +6,7 @@
   "author": "ProFabric <mmd-1903@hotmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "node_modules/.bin/nodemon src/index.js",
+    "start": "node_modules/.bin/nodemon --exec babel-node src/index.js",
     "lint": "node_modules/.bin/eslint 'src/**/*.js' --fix",
     "format": "node_modules/.bin/prettier-eslint $PWD/'src/**/*.{js,json}' --write"
   },
@@ -41,6 +41,10 @@
     "validator": "^12.2.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.8.4",
+    "@babel/node": "^7.8.4",
+    "@babel/preset-env": "^7.8.4",
     "eslint": "^6.5.1",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-config-prettier": "^6.4.0",
