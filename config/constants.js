@@ -17,7 +17,7 @@ const defaultConfig = {
   PORT: process.env.PORT || 8080
 };
 
-function envConfig(env) {
+function envConfig (env) {
   switch (env) {
     case 'development':
       return devConfig;

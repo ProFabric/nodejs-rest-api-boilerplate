@@ -1,11 +1,14 @@
-const router = require('express').Router();
-const userController = require('./../../controllers/user.controller');
+import express from 'express';
+import UserController from '../../controllers/user.controller';
+import AuthController from '../../controllers/auth.controller';
 
-router.post('/signup', userController.registerUser);
+const authLocal = require('../../services/auth.service');
 
-router.post('/signin', (req, res) => {
-  res.status(200).json('signin');
-});
+const router = express.Router();
+
+router.post('/signup', UserController.registerUser);
+
+router.post('/signin', authLocal.default.authLocal, AuthController.login);
 
 router.post('/forget-password', (req, res) => {
   res.status(200).json('forget-password');

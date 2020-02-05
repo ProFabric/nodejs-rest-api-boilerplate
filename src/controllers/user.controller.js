@@ -1,21 +1,20 @@
-const userModel = require('../models/user.model');
+import UserModel from '../models/user.model';
 
-const userController = {};
+const UserController = {};
 
-userController.registerUser = (req, res) => {
+UserController.registerUser = async (req, res) => {
   const userData = req.body;
-  return userModel
-    .findOne({ email: userData.email })
-    .then(data => {
-      if (data) {
-        return res.status(500).json({ message: 'Kullanıcı zaten var' });
-      }
-      // eslint-disable-next-line promise/no-return-wrap
-      return Promise.resolve(data);
-    })
-    .then(() => userModel.create({ email: userData.email, password: userData.password }))
-    .then(() => res.status(200).json({ message: 'Kullanıcı oluşturuldu' }))
-    .catch(error => res.status(500).json(error));
+  try {
+    const user = await UserModel.findOne({ email: userData.email });
+    if (user) {
+      return res.status(500).json({ message: 'Kullanıcı zaten var' });
+    }
+
+    const createdUser = await UserModel.create({ email: userData.email, password: userData.password });
+    return res.status(200).json({ message: 'Kullanıcı oluşturuldu', user: createdUser });
+  } catch (error) {
+    return res.status(500).json(error);
+  }
 };
 
-module.exports = userController;
+export default UserController;

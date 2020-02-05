@@ -1,5 +1,7 @@
-const authController = {};
+const AuthController = {};
 
-// authController.login = (req, res) => {};
+AuthController.login = (req, res) => {
+  res.status(200).json(req.user.toAuthJSON());
+};
 
-module.exports = authController;
+export default AuthController;

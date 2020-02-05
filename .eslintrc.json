@@ -21,7 +21,14 @@
     "promise/no-return-in-finally": "error",
     "prefer-arrow-callback": "error",
     "comma-dangle": ["error", "never"],
-    "space-before-function-paren": ["error", "never"],
+    "space-before-function-paren": [
+      "error",
+      {
+        "anonymous": "always",
+        "named": "always",
+        "asyncArrow": "always"
+      }
+    ],
     "strict": ["error", "global"],
     "arrow-parens": ["error", "as-needed"]
   }
