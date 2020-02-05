@@ -1,8 +1,10 @@
 const mongoose = require('mongoose');
 const constants = require('./constants');
 
+mongoose.set('useCreateIndex', true);
+
 try {
-  mongoose.connect(constants.MONGO_URL);
+  mongoose.connect(constants.MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true });
 } catch (error) {
   mongoose.createConnection(constants.MONGO_URL);
 }
