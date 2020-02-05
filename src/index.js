@@ -8,6 +8,7 @@ import passport from 'passport';
 import dotenv from 'dotenv';
 import constants from '../config/constants';
 import {} from '../config/db';
+import routes from './routes';
 
 dotenv.config();
 
@@ -33,8 +34,6 @@ app.use(passport.initialize());
 if (isDev) {
   app.use(morgan('dev'));
 }
-
-const routes = require('./routes');
 
 app.use('/v1', routes);
 

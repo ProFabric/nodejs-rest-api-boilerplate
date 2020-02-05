@@ -1,6 +1,8 @@
-const router = require('express').Router({ mergeParams: true });
-const publicRoutes = require('./public/auth.route');
+import express from 'express';
+import publicRoutes from './public/auth.route';
+
+const router = express.Router({ mergeParams: true });
 
 router.use('/auth', publicRoutes);
 
-module.exports = router;
+export default router;

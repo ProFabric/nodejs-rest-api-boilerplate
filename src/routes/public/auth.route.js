@@ -13,4 +13,4 @@ router.post('/forget-password', (req, res) => {
   res.status(200).json('forget-password');
 });
 
-module.exports = router;
+export default router;
