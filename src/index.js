@@ -5,21 +5,15 @@ import morgan from 'morgan';
 import compression from 'compression';
 import helmet from 'helmet';
 import passport from 'passport';
-import dotenv from 'dotenv';
 import constants from '../config/constants';
-import {} from '../config/db';
 import routes from './routes';
-
-dotenv.config();
+import {} from '../config/db';
 
 const app = express();
 const port = constants.PORT;
 
 const isDev = process.env.NODE_ENV === 'development';
 const isProd = process.env.NODE_ENV === 'production';
-
-// eslint-disable-next-line no-console
-console.log('NODE_ENV', process.env.NODE_ENV);
 
 if (isProd) {
   app.use(compression());
