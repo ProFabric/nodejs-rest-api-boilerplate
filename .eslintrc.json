@@ -2,8 +2,12 @@
   "env": {
     "node": true
   },
-  "extends": "airbnb-base",
-  "plugins": ["promise"],
+  "extends": ["airbnb-base", "prettier"],
+  "plugins": ["promise", "prettier"],
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module"
+  },
   "rules": {
     "no-console": "error",
     "promise/always-return": "error",
