@@ -5,12 +5,29 @@ import morgan from 'morgan';
 import compression from 'compression';
 import helmet from 'helmet';
 import passport from 'passport';
-import constants from '../config/constants';
+import dotenv from 'dotenv';
+import mongoose from 'mongoose';
 import routes from './routes';
-import {} from '../config/db';
+
+dotenv.config();
+
+// DB CONNECTION START
+
+mongoose.set('useCreateIndex', true);
+
+try {
+  mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true, useUnifiedTopology: true });
+} catch (error) {
+  mongoose.createConnection(process.env.DATABASE_URL);
+}
+
+// eslint-disable-next-line no-console
+mongoose.connection.once('open', () => console.log('MongoDB is connected'));
+
+// DB CONNECTION END
 
 const app = express();
-const port = constants.PORT;
+const port = process.env.PORT || 8080;
 
 const isDev = process.env.NODE_ENV === 'development';
 const isProd = process.env.NODE_ENV === 'production';

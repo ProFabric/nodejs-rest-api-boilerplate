@@ -1,12 +1,11 @@
 /* eslint-disable no-underscore-dangle */
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
+
 const { hashSync, compareSync } = require('bcrypt-nodejs');
 const validator = require('validator');
 const jwt = require('jsonwebtoken');
 const uniqueValidator = require('mongoose-unique-validator');
-
 const { passwordRegex } = require('./../validations/user.validation');
-const constants = require('./../../config/constants');
 
 const UserSchema = new mongoose.Schema(
   {
@@ -62,7 +61,7 @@ UserSchema.methods = {
       {
         ID: this._id
       },
-      constants.JWT_SECRET
+      process.env.JWT_SECRET
     );
   },
   toAuthJSON () {

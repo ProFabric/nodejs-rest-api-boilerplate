@@ -1,8 +1,10 @@
 import passport from 'passport';
 import { Strategy as LocalStrategy } from 'passport-local';
 import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt';
-import Constants from '../../config/constants';
+import dotenv from 'dotenv';
 import UserModel from '../models/user.model';
+
+dotenv.config();
 
 const localOpts = {
   usernameField: 'email',
@@ -28,7 +30,7 @@ const localStrategy = new LocalStrategy(localOpts, async (email, password, done)
 
 const jwtOpts = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-  secretOrKey: Constants.JWT_SECRET
+  secretOrKey: process.env.JWT_SECRET
 };
 
 const jwtStrategy = new JwtStrategy(jwtOpts, async (payload, done) => {
