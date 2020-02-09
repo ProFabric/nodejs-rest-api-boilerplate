@@ -1,18 +1,15 @@
-const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
-// const CompanyModel = require('./../models/company.model');
-const JwtStrategy = require('passport-jwt').Strategy;
-const { ExtractJwt } = require('passport-jwt');
-
-const constants = require('./../../config/constants');
-const UserModel = require('./../models/user.model');
+import passport from 'passport';
+import { Strategy as LocalStrategy } from 'passport-local';
+import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt';
+import Constants from '../../config/constants';
+import UserModel from '../models/user.model';
 
 const localOpts = {
   usernameField: 'email',
   passwordField: 'password'
 };
 
-const localStrategy = new LocalStrategy(localOpts, async(email, password, done) => {
+const localStrategy = new LocalStrategy(localOpts, async (email, password, done) => {
   try {
     const user = await UserModel.findOne({ email });
     if (!user) {
@@ -23,8 +20,6 @@ const localStrategy = new LocalStrategy(localOpts, async(email, password, done) 
       return done(null, false);
     }
 
-    // user.company = await CompanyModel.findOne({ _id: user.companyID });
-
     return done(null, user);
   } catch (error) {
     return done(error, false);
@@ -33,16 +28,15 @@ const localStrategy = new LocalStrategy(localOpts, async(email, password, done) 
 
 const jwtOpts = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-  secretOrKey: constants.JWT_SECRET
+  secretOrKey: Constants.JWT_SECRET
 };
 
-const jwtStrategy = new JwtStrategy(jwtOpts, async(payload, done) => {
+const jwtStrategy = new JwtStrategy(jwtOpts, async (payload, done) => {
   try {
     const user = await UserModel.findById(payload.ID);
     if (!user) {
       return done(null, false);
     }
-    // user.company = await CompanyModel.findOne({ _id: user.companyID });
     return done(null, user);
   } catch (error) {
     return done(error, false);
@@ -52,7 +46,7 @@ const jwtStrategy = new JwtStrategy(jwtOpts, async(payload, done) => {
 passport.use(localStrategy);
 passport.use(jwtStrategy);
 
-module.exports = {
+export default {
   authLocal: passport.authenticate('local', { session: false }),
   authJwt: passport.authenticate('jwt', { session: false })
 };

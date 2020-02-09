@@ -16,7 +16,7 @@ const UserSchema = new mongoose.Schema(
       required: [true, 'Email is required'],
       trim: true,
       validate: {
-        validator(email) {
+        validator (email) {
           return validator.isEmail(email);
         },
         message: '{VALUE} is not valid email!'
@@ -28,7 +28,7 @@ const UserSchema = new mongoose.Schema(
       trim: true,
       minlength: [6, 'Password needs to be longer!'],
       validate: {
-        validator(password) {
+        validator (password) {
           return passwordRegex.test(password);
         },
         message: '{VALUE} is not valid password'
@@ -43,7 +43,7 @@ UserSchema.plugin(uniqueValidator, {
 });
 
 // eslint-disable-next-line func-names
-UserSchema.pre('save', function(next) {
+UserSchema.pre('save', function (next) {
   if (this.isModified('password')) {
     this.password = this._hashPassword(this.password);
   }
@@ -51,13 +51,13 @@ UserSchema.pre('save', function(next) {
 });
 
 UserSchema.methods = {
-  _hashPassword(password) {
+  _hashPassword (password) {
     return hashSync(password);
   },
-  authenticateUser(password) {
+  authenticateUser (password) {
     return compareSync(password, this.password);
   },
-  createToken() {
+  createToken () {
     return jwt.sign(
       {
         ID: this._id
@@ -65,18 +65,17 @@ UserSchema.methods = {
       constants.JWT_SECRET
     );
   },
-  toAuthJSON() {
+  toAuthJSON () {
     return {
       token: this.createToken()
     };
   },
-  toJSON() {
+  toJSON () {
     return {
-      companyID: this.companyID,
       ID: this._id,
       email: this.email
     };
   }
 };
 
-module.exports = mongoose.model('User', UserSchema);
+export default mongoose.model('User', UserSchema);
