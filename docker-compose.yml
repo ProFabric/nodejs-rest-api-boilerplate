@@ -1,0 +1,49 @@
+version: '3'
+
+networks:
+  proxy:
+    external: true
+  internal:
+    external: false
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: 'App'
+    volumes:
+      - /app/node_modules
+      - ./:/app
+    working_dir: /app
+    depends_on:
+      - mongo
+    networks:
+      - internal
+      - proxy
+    security_opt:
+      - no-new-privileges:true
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.http.routers.app.entrypoints=http'
+      - 'traefik.http.routers.app.rule=Host(`app.erdkse.local`)'
+      - 'traefik.http.middlewares.app-https-redirect.redirectscheme.scheme=https'
+      - 'traefik.http.routers.app.middlewares=app-https-redirect'
+      - 'traefik.http.routers.app-secure.entrypoints=https'
+      - 'traefik.http.routers.app-secure.rule=Host(`app.erdkse.local`)'
+      - 'traefik.http.routers.app-secure.tls=true'
+      - 'traefik.http.routers.app-secure.tls.certresolver=http'
+      - 'traefik.http.routers.app-secure.service=app'
+      - 'traefik.http.services.app.loadbalancer.server.port=8080'
+      - 'traefik.docker.network=proxy'
+
+  mongo:
+    image: mongo:3.4.24
+    container_name: 'App-MongoDB'
+    environment:
+      - MONGO_DATA_DIR=/data/db
+      - MONGO_LOG_DIR=/dev/null
+    volumes:
+      - ${PWD}/app.db/data/db:/data/db
+    networks:
+      - internal
