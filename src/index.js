@@ -1,23 +1,19 @@
-const express = require('express');
-const cors = require('cors');
-const bodyParser = require('body-parser');
-const morgan = require('morgan');
-const compression = require('compression');
-const helmet = require('helmet');
-const passport = require('passport');
-const constants = require('../config/constants');
-
-require('dotenv').config();
-require('./../config/db');
+import express from 'express';
+import cors from 'cors';
+import bodyParser from 'body-parser';
+import morgan from 'morgan';
+import compression from 'compression';
+import helmet from 'helmet';
+import passport from 'passport';
+import constants from '../config/constants';
+import routes from './routes';
+import {} from '../config/db';
 
 const app = express();
 const port = constants.PORT;
 
 const isDev = process.env.NODE_ENV === 'development';
 const isProd = process.env.NODE_ENV === 'production';
-
-// eslint-disable-next-line no-console
-console.log('NODE_ENV', process.env.NODE_ENV);
 
 if (isProd) {
   app.use(compression());
@@ -32,8 +28,6 @@ app.use(passport.initialize());
 if (isDev) {
   app.use(morgan('dev'));
 }
-
-const routes = require('./routes');
 
 app.use('/v1', routes);
 

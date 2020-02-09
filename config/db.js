@@ -1,10 +1,14 @@
-const mongoose = require('mongoose');
-const constants = require('./constants');
+import dotenv from 'dotenv';
+import mongoose from 'mongoose';
+
+dotenv.config();
+
+mongoose.set('useCreateIndex', true);
 
 try {
-  mongoose.connect(constants.MONGO_URL);
+  mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true, useUnifiedTopology: true });
 } catch (error) {
-  mongoose.createConnection(constants.MONGO_URL);
+  mongoose.createConnection(process.env.DATABASE_URL);
 }
 
 // eslint-disable-next-line no-console
